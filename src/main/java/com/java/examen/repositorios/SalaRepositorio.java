@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SalaRepositorio extends JpaRepository<Sala,Integer> {
+public interface SalaRepositorio extends JpaRepository<Sala, Long> {
+    @Query("select e from Sala e")
+    List<Sala> obtenerSala();
 
-    @Query("select e from Sala as e ")
-    List<Sala> obtenerSalas();
 }

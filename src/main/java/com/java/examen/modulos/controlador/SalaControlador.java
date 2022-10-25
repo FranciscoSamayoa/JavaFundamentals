@@ -12,37 +12,36 @@ import java.util.List;
 @RestController
 @RequestMapping("sala")
 public class SalaControlador {
+
     @Autowired
     private SalaServicio salaServicio;
-
-    @GetMapping("obtenerListaSala")
-    public ResponseEntity<List<SalaDTO>> obtenerSala(){
-        List<SalaDTO> lista = salaServicio.obtenerSala();
-        return new ResponseEntity<>( lista, HttpStatus.OK);
+    @GetMapping("obtener")
+    public ResponseEntity<List<SalaDTO>> obtenerSalas(){
+        List<SalaDTO> respuesta = salaServicio.obtenerSala();
+        return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
 
-    @GetMapping("obtenerIdSala")
-    public ResponseEntity<SalaDTO> obtenerSalaId(@RequestParam Integer idSala){
-        SalaDTO respuesta = salaServicio.obtenerSalaId(idSala);
-        return new ResponseEntity<>( respuesta, HttpStatus.OK);
+    @GetMapping("obtener/id")
+    public ResponseEntity<SalaDTO> obtenerSalas(@RequestParam Long id_sala){
+        SalaDTO respuesta = salaServicio.obtenerSalaPorId(id_sala);
+        return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
 
-    @PostMapping("crear")
-    public ResponseEntity<Boolean> crearSala(@RequestBody SalaDTO paramentros){
-        boolean respuesta = salaServicio.crearSala(paramentros);
-        return new ResponseEntity<>( respuesta, HttpStatus.OK);
+    @PostMapping("guardar")
+    public ResponseEntity<Boolean> guardarSala(@ModelAttribute SalaDTO parametros){
+        Boolean respuesta = salaServicio.guardarSala(parametros);
+        return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
 
-    @PutMapping ("actualizar")
-    public ResponseEntity<Boolean> actualizarSala(@RequestBody SalaDTO parametros){
+    @PutMapping("actualizar")
+    public ResponseEntity<Boolean> actualizarSala(@ModelAttribute SalaDTO parametros){
         boolean respuesta = salaServicio.actualizarSala(parametros);
-        return new ResponseEntity<>( respuesta, HttpStatus.OK);
+        return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
 
     @DeleteMapping("eliminar")
-    public ResponseEntity<Boolean> eliminartSala(@RequestParam Integer idSala){
-        boolean respuesta = salaServicio.eliminarSala(idSala);
-        return new ResponseEntity<>( respuesta, HttpStatus.OK);
+    public ResponseEntity<Boolean> eliminarSala(@RequestParam Long id_sala){
+        Boolean respuesta = salaServicio.eliminarSala(id_sala);
+        return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
-
 }
